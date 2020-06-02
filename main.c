@@ -90,6 +90,7 @@ int main() {
     printf("Count: %d\n", countNodesInList(p));
     printf("Sum: %d\n", sumNodesInList(p));
     printf("Max: %d\n", maxInList(p));
+    //test
     return 0;
 }
 
