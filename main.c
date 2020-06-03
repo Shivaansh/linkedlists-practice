@@ -77,6 +77,32 @@ int maxInList(struct Node *p){
     return max;
 }
 
+struct Node* searchInList(struct Node *p, int key){
+    while(p != NULL){
+        if(key == p->value){
+            return p;
+        }
+        p = p->next;
+    }
+    return NULL;
+}
+
+struct Node* searchInListLRU(struct Node *p, int key){
+    struct Node *head = p;
+    struct Node *q;
+    while(p != NULL){
+        if(key == p->value){
+            q->next = p->next;
+            p->next = head;
+            head = p;
+            return head;
+        }
+        q = p;
+        p = p->next;
+    }
+    return NULL;
+}
+
 int main() {
 
     int arr[6] = {2,4,6,8,10,12};
@@ -90,7 +116,27 @@ int main() {
     printf("Count: %d\n", countNodesInList(p));
     printf("Sum: %d\n", sumNodesInList(p));
     printf("Max: %d\n", maxInList(p));
-    //test
+    int num1 = 10;
+    struct Node *s1 = searchInList(p, num1);
+    if(s1 != NULL){
+        printf("Found value %d in list\n", num1);
+    }else{
+        printf("Did not find value %d in list\n", num1);
+    }
+    int num2 = 11;
+    struct Node *s2 = searchInList(p, num2);
+    if(s2 != NULL){
+        printf("Found value %d in list\n", num2);
+    }else{
+        printf("Did not find value %d in list\n", num2);
+    }
+    int num3 = 8;
+    struct Node *s3 = searchInListLRU(p, num3);
+    if(s3 != NULL){
+        printf("Found value %d in list\n", s3->value);
+    }else{
+        printf("Did not find value %d in list\n", s3->value);
+    }
     return 0;
 }
 
