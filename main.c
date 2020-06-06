@@ -126,6 +126,24 @@ struct Node* insertInLinkedList(struct Node *head, int pos, int x){
     return head;
 }
 
+//Doesn't check if the list is sorted or not
+struct Node* insertInSortedLL(struct Node *head, int x){
+    struct Node *p, *q;
+    p = head;
+    q = NULL;
+
+    while(p && p->value < x){
+        q = p;
+        p = p->next;
+    }
+    struct Node *temp = (struct Node*)malloc(sizeof(struct Node));
+    temp->value = x;
+    temp->next = p;
+    q->next = temp;
+
+    return head;
+}
+
 int main() {
 
     int arr[6] = {2,4,6,8,10,12};
@@ -163,6 +181,13 @@ int main() {
     displayList(s3);
     p = insertInLinkedList(p,4,9);
     displayList(s3);
+
+    int arr2[6] = {1,3,5,7,9,11};
+    struct Node *q = createList(arr2, 6);
+    displayList(q);
+    insertInSortedLL(q, 10);
+    displayList(q);
+
     return 0;
 }
 
