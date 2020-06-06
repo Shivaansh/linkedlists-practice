@@ -89,18 +89,41 @@ struct Node* searchInList(struct Node *p, int key){
 
 struct Node* searchInListLRU(struct Node *p, int key){
     struct Node *head = p;
-    struct Node *q;
+    struct Node *q = (struct Node*)malloc(sizeof(struct Node));
     while(p != NULL){
         if(key == p->value){
             q->next = p->next;
             p->next = head;
             head = p;
-            return head;
+            return p;
         }
         q = p;
         p = p->next;
     }
     return NULL;
+}
+
+struct Node* insertInLinkedList(struct Node *head, int pos, int x){
+    struct Node *temp;
+    temp = (struct Node*)malloc(sizeof(struct Node));
+    temp->value = x;
+
+    if(pos < 0){
+        return head;
+    }
+
+    if(pos == 0){
+        temp->next = head;
+        head = temp;
+    }else{
+        struct Node *p = head;
+        for(int i = 0; i < pos-1; i++){
+            p = p->next;
+        }
+        temp->next = p->next;
+        p->next = temp;
+    }
+    return head;
 }
 
 int main() {
@@ -137,6 +160,9 @@ int main() {
     }else{
         printf("Did not find value %d in list\n", s3->value);
     }
+    displayList(s3);
+    p = insertInLinkedList(p,4,9);
+    displayList(s3);
     return 0;
 }
 
